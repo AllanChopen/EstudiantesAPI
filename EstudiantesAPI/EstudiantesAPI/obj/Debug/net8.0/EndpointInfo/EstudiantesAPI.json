@@ -1,0 +1,262 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Estudiantes API",
+    "description": "Web Service para gestión de estudiantes",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Estudiantes": {
+      "post": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "summary": "Crea un nuevo estudiante.",
+        "requestBody": {
+          "description": "Datos del estudiante a crear.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Estudiantes"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Estudiantes"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Estudiantes"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Estudiante creado exitosamente.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiantes"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiantes"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiantes"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos del estudiante inválidos o nulos.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Estudiantes/{carnet}": {
+      "get": {
+        "tags": [
+          "Estudiantes"
+        ],
+        "summary": "Obtiene un estudiante por su número de carnet.",
+        "parameters": [
+          {
+            "name": "carnet",
+            "in": "path",
+            "description": "Carnet del estudiante a buscar.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Estudiante encontrado.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiantes"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiantes"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estudiantes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontró un estudiante con ese carnet.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Estudiantes": {
+        "type": "object",
+        "properties": {
+          "carnet": {
+            "type": "integer",
+            "description": "Carnet único del estudiante. Actúa como clave primaria.",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del estudiante.",
+            "nullable": true
+          },
+          "apellido": {
+            "type": "string",
+            "description": "Apellido del estudiante.",
+            "nullable": true
+          },
+          "semestre": {
+            "type": "integer",
+            "description": "Semestre que actualmente cursa el estudiante.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Representa un estudiante dentro del sistema académico."
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
