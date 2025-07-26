@@ -1,54 +1,75 @@
-# EstudiantesAPI
+# WebServiceVentas
 
-Descripción
-EstudiantesAPI es un servicio web RESTful desarrollado en ASP.NET Core que permite la gestión básica de estudiantes en un sistema académico. Proporciona endpoints para crear y obtener estudiantes mediante HTTP POST y GET. Utiliza Entity Framework Core con MySQL para persistencia de datos.
+API RESTful para la gestión de productos y ventas, desarrollada en ASP.NET Core y MySQL.
 
-Características principales:
+## Características
 
-Crear estudiantes con información básica (carnet, nombre, apellido, semestre).
+- CRUD de productos
+- Conexión a base de datos MySQL (tabla `productos`)
+- Ejemplo de modelo: Producto (`Id`, `Nombre`, `Precio`)
+- API documentada con Swagger
 
-Consultar estudiantes por carnet.
+## Requisitos
 
-Documentación automática de la API mediante Swagger/OpenAPI.
+- .NET 6.0 o superior
+- MySQL/MariaDB
+- Visual Studio o VS Code
 
-Código limpio y comentado para facilitar mantenimiento y ampliación.
+## Instalación
 
-Tecnologías utilizadas:
+1. **Clona el repositorio**
+   ```bash
+   git clone https://github.com/AllanChopen/WebServiceVentas.git
+   ```
 
-.NET 8.0
+2. **Configura la cadena de conexión en `appsettings.json`**
+   ```json
+   "ConnectionStrings": {
+     "MySqlConnection": "Server=127.0.0.1;Database=VENTAS;User=root;Password=;"
+   }
+   ```
 
-ASP.NET Core Web API
+3. **Crea la tabla en MySQL**
+   ```sql
+   CREATE TABLE productos (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     nombre VARCHAR(255) NOT NULL,
+     precio DECIMAL(18,2) NOT NULL
+   );
+   ```
 
-Entity Framework Core con Pomelo MySQL
+4. **Restaura los paquetes y ejecuta el proyecto**
+   ```bash
+   dotnet restore
+   dotnet run
+   ```
 
-Swagger / Swashbuckle para documentación API
+5. **Abre Swagger para probar la API**
+   - Normalmente en: `http://localhost:XXXX/swagger`
 
-Requisitos:
+## Endpoints principales
 
-MySQL (o MariaDB) funcionando y accesible.
+- `GET /api/Productos` — Listar productos
+- `POST /api/Productos` — Crear producto
+- `PUT /api/Productos/{id}` — Actualizar producto
+- `DELETE /api/Productos/{id}` — Eliminar producto
 
-Cadena de conexión configurada en appsettings.json.
+## Modelo de Producto
 
-.NET SDK 8.0 instalado.
+```csharp
+public class Producto
+{
+    public int Id { get; set; }
+    [Required]
+    public string Nombre { get; set; }
+    public decimal Precio { get; set; }
+}
+```
 
-Instalación y ejecución:
+## Licencia
 
-Clonar el repositorio.
+MIT
 
-Configurar la cadena de conexión en appsettings.json con los datos de tu base MySQL.
-
-Restaurar paquetes:
-
-bash
-Copy code
-dotnet restore
-Ejecutar la aplicación:
-
-bash
-Copy code
-dotnet run
-Acceder a Swagger UI para probar la API en:
-http://localhost:5000/swagger/index.html (ajustar puerto según configuración).
 
 Uso:
 
